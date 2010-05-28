@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XNACarrom", "WindowsGame1\XNACarrom.csproj", "{D9DDACC7-C6F0-4283-9A90-F43511DFD5E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9DDACC7-C6F0-4283-9A90-F43511DFD5E6}.Debug|x86.ActiveCfg = Debug|x86
+		{D9DDACC7-C6F0-4283-9A90-F43511DFD5E6}.Debug|x86.Build.0 = Debug|x86
+		{D9DDACC7-C6F0-4283-9A90-F43511DFD5E6}.Release|x86.ActiveCfg = Release|x86
+		{D9DDACC7-C6F0-4283-9A90-F43511DFD5E6}.Release|x86.Build.0 = Release|x86
+		{5A1D89F4-26FD-4BD0-87F2-DF44B1E48929}.Debug|x86.ActiveCfg = Debug|x86
+		{5A1D89F4-26FD-4BD0-87F2-DF44B1E48929}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
