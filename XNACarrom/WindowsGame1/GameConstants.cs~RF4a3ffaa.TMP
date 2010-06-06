@@ -21,8 +21,8 @@ namespace WindowsGame1
         public const int pieceHeight = 150;
 
 
-        public static Vector3 center = new Vector3(0.0f, 0.0f, 0.0f);
-        public static Vector3[] pieceLocations = {
+        public const Vector3 center = new Vector3(0.0f, 0.0f, 0.0f);
+        public const Vector3[] pieceLocations = {
                                                     new Vector3(center.X, center.Y, 0.0f),
                                                     
                                                     new Vector3(center.X, center.Y + pieceWidth, 0.0f),

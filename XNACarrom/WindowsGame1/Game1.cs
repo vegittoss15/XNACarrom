@@ -84,6 +84,20 @@ namespace WindowsGame1
             return absoluteTransforms;
         }
 
+        private CarromMan createCarromMan(Vector3 loc)
+        {
+            CarromMan cm = new CarromMan();
+            Random random = new Random();
+
+            double angle = random.NextDouble() * 2 * Math.PI;
+            cm.direction.X = -(float)Math.Sin(angle);
+            cm.direction.Y = -(float)Math.Cos(angle);
+            cm.speed = GameConstants.CarromMenMinSpeed +
+                0.5f * GameConstants.CarromMenMaxSpeed;
+            cm.position = loc;
+            return cm;
+        }
+
         /// <summary>
         /// Place carromMen in their proper locations, based on location in array
         /// carromManList[0] = queen
@@ -92,137 +106,11 @@ namespace WindowsGame1
         /// </summary>
         private void resetCarromMen()
         {
-            float xStart, yStart;
-            //Vector2 center = new Vector2(graphics.GraphicsDevice.Viewport.Width / 2, graphics.GraphicsDevice.Viewport.Height / 2);
-            Vector2 center = new Vector2(0, 0);
-
-            Random r = new Random();
-            for (int i = 0; i < GameConstants.NumCarromMen; i++)
+            int i = 0;
+            foreach (Vector3 loc in GameConstants.pieceLocations)
             {
-                CarromMan cm = new CarromMan();
-                double angle = r.NextDouble() * 2 * Math.PI;
-                cm.direction.X = -(float)Math.Sin(angle);
-                cm.direction.Y = -(float)Math.Cos(angle);
-                cm.speed = GameConstants.CarromMenMinSpeed +
-                    0.5f * GameConstants.CarromMenMaxSpeed;
-
-                //queen or center piece
-                if (i == 0)
-                {
-                    xStart = center.X;
-                    yStart = center.Y;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                }
-                //second layer: pieces above and below
-                else if (i > 0 && i < 3)
-                {
-                    xStart = center.X;
-                    yStart = center.Y + GameConstants.pieceWidth;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-
-                    yStart = center.Y - GameConstants.pieceWidth;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                }
-                //second layer: surrounding pieces
-                else if (i >= 3 && i < 7)
-                {
-                    xStart = center.X + GameConstants.pieceHeight;
-                    yStart = center.Y + GameConstants.pieceWidth / 2;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-
-                    yStart = center.Y - GameConstants.pieceWidth / 2;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-
-                    xStart = center.X - GameConstants.pieceHeight;
-                    yStart = center.Y + GameConstants.pieceWidth / 2;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-
-                    yStart = center.Y - GameConstants.pieceWidth / 2;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                }
-                //third layer: four corners
-                else if (i >= 7 && i < 11)
-                {
-                    xStart = center.X;
-                    yStart = center.Y + GameConstants.pieceWidth * 2;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-
-                    yStart = center.Y - GameConstants.pieceWidth * 2;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-
-                    xStart = center.X + GameConstants.pieceHeight * 2;
-                    yStart = center.Y;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-
-                    xStart = center.X - GameConstants.pieceHeight * 2;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                }
-                //third layer: immediately higher/lower pieces
-                else if (i >= 11 && i < 15)
-                {
-                    xStart = center.X + GameConstants.pieceHeight;
-                    yStart = center.Y + GameConstants.pieceWidth / (2.0f/3);
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-
-                    yStart = center.Y - GameConstants.pieceWidth / (2.0f/3);
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-
-                    xStart = center.X - GameConstants.pieceHeight;
-                    yStart = center.Y + GameConstants.pieceWidth / (2.0f / 3);
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-
-                    yStart = center.Y - GameConstants.pieceWidth / (2.0f / 3);
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                }
-                //third layer: diagonal pieces
-                else if (i >= 15 && i < 19)
-                {
-                    xStart = center.X + GameConstants.pieceHeight / (2.0f / 3);
-                    yStart = center.Y + GameConstants.pieceWidth;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-                    
-                    yStart = center.Y - GameConstants.pieceWidth;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-
-                    xStart = center.X - GameConstants.pieceHeight / (2.0f / 3);
-                    yStart = center.Y + GameConstants.pieceWidth;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                    i++;
-
-                    yStart = center.Y - GameConstants.pieceWidth;
-                    cm.position = new Vector3(xStart, yStart, 0.0f);
-                    carromManList[i] = cm;
-                }
+                carromManList[i] = createCarromMan(loc);
+                i++;
             }
         }
 
