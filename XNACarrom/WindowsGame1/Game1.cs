@@ -84,10 +84,9 @@ namespace WindowsGame1
             return absoluteTransforms;
         }
 
-        private CarromMan createCarromMan(Vector3 loc)
+        private CarromMan createCarromMan(Vector3 loc, Random random)
         {
             CarromMan cm = new CarromMan();
-            Random random = new Random();
 
             double angle = random.NextDouble() * 2 * Math.PI;
             cm.direction.X = -(float)Math.Sin(angle);
@@ -107,9 +106,10 @@ namespace WindowsGame1
         private void resetCarromMen()
         {
             int i = 0;
+            Random random = new Random();
             foreach (Vector3 loc in GameConstants.pieceLocations)
             {
-                carromManList[i] = createCarromMan(loc);
+                carromManList[i] = createCarromMan(loc, random);
                 i++;
             }
         }
