@@ -1,1 +1,6 @@
-Test
+To load the Model and Texture into Visual Studio 2008, do the following:
+
+Right-click the Models folder in the Solution Explorer, click Add, and then click Existing Item. Using the dialog box that appears, browse back to the path you extracted the contents of the sample file to and find the Contents\Models folder. Select p1_wedge.fbx. If you cannot see any files, make sure you change the Files of type selection box to read Model Files. Click OK. 
+Now, copy the texture associated with the model into the Textures folder. To do this, open a Windows Explorer window and browse to the Content\Textures folder of the extracted sample. Copy wedge_p1_diff_v1.tga, and then browse to your project folder, then into the Content\Textures folder, and paste in the file you just copied.
+
+***Note that you do not see the texture you added in Solution Explorer. When you add a model, the textures that the model uses do not need to be added to the Content Pipeline. If you need to add textures that you will access manually (such as textures used for 2D sprite drawing), do so via Solution Explorer. Otherwise, you can simply copy the texture files to the appropriate folder.
