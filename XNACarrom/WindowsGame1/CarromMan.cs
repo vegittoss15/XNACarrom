@@ -11,16 +11,9 @@ namespace WindowsGame1
         public Vector3 position, direction;
         public float speed;
 
-        public CarromMan()
-        {
-            position = Vector3.Zero;
-            direction = Vector3.Zero;
-            speed = 0.0f;
-        }
-
         public void Update(float delta)
         {
-            position += direction * speed * GameConstants.CarromMenSpeedAdjustment * delta;
+            //position += direction * speed * GameConstants.CarromMenSpeedAdjustment * delta;
 
             //if the pieces hit the edges, make them bounce back
             //TODO account for the piece sizes when bouncing back

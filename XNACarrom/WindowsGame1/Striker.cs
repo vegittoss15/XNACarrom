@@ -14,7 +14,8 @@ namespace WindowsGame1
         public Matrix[] Transforms;
 
         //position of the model in world space
-        public Vector3 Position = Vector3.Zero;
+        //public Vector3 Position = Vector3.Zero;
+        public Vector3 Position = new Vector3(GameConstants.PlayFieldSizeX/12, -1*GameConstants.PlayFieldSizeY/2, 0.0f);
 
         //velocity of the model, applied each frame to the model's position
         public Vector3 Velocity = Vector3.Zero;

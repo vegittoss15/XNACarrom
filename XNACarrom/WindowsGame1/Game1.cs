@@ -88,12 +88,12 @@ namespace WindowsGame1
         {
             CarromMan cm = new CarromMan();
 
+            cm.position = loc;
             double angle = random.NextDouble() * 2 * Math.PI;
             cm.direction.X = -(float)Math.Sin(angle);
-            cm.direction.Y = -(float)Math.Cos(angle);
+            cm.direction.Y = (float)Math.Cos(angle);
             cm.speed = GameConstants.CarromMenMinSpeed +
                 0.5f * GameConstants.CarromMenMaxSpeed;
-            cm.position = loc;
             return cm;
         }
 
@@ -171,9 +171,58 @@ namespace WindowsGame1
             //the striker should slow down over time for various reasons
             striker.Velocity *= 0.95f;
 
+            //update carrom men locations
             for (int i = 0; i < GameConstants.NumCarromMen; i++)
             {
                 carromManList[i].Update(timeDelta);
+            }
+
+            //check for collisions between striker and carrom-men
+            BoundingSphere strikerSphere = new BoundingSphere(
+                striker.Position, striker.Model.Meshes[0].BoundingSphere.Radius * GameConstants.strikerBoundingSphereScale);
+            for (int i = 0; i < carromManList.Length; i++)
+            {
+                BoundingSphere cman = new BoundingSphere(carromManList[i].position,
+                    carromManModel.Meshes[0].BoundingSphere.Radius *
+                    GameConstants.carromManBoundingSphereScale);
+                if (cman.Intersects(strikerSphere))
+                {
+                    //bounce back
+                    carromManList[i].direction.X *= -1;
+                    carromManList[i].direction.Y *= -1;
+
+                    carromManList[i].position += 10*carromManList[i].direction *
+                                                 carromManList[i].speed * GameConstants.CarromMenSpeedAdjustment * timeDelta;
+                }
+            }
+
+            //check for collisions amongst the carrom-men
+            for (int a = 0; a < carromManList.Length; a++)
+            {
+                BoundingSphere piece1 = new BoundingSphere(
+                    carromManList[a].position, carromManModel.Meshes[0].BoundingSphere.Radius *
+                    GameConstants.carromManBoundingSphereScale);
+                for (int b = a+1; b < carromManList.Length; b++)
+                {
+                    BoundingSphere piece2 = new BoundingSphere(
+                    carromManList[a].position, carromManModel.Meshes[0].BoundingSphere.Radius *
+                    GameConstants.carromManBoundingSphereScale);
+                    if (piece1.Intersects(piece2))
+                    {
+                        //bounce back
+                        carromManList[a].direction.X *= -1;
+                        carromManList[a].direction.Y *= -1;
+
+                        carromManList[a].position += carromManList[a].direction *
+                                                 carromManList[a].speed * GameConstants.CarromMenSpeedAdjustment * timeDelta;
+
+                        carromManList[b].direction.X *= -1;
+                        carromManList[b].direction.Y *= -1;
+
+                        carromManList[b].position += carromManList[b].direction *
+                                                 carromManList[b].speed * GameConstants.CarromMenSpeedAdjustment * timeDelta;
+                    }
+                }
             }
 
             base.Update(gameTime);

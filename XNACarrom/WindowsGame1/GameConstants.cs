@@ -17,9 +17,11 @@ namespace WindowsGame1
         public const float CarromMenMinSpeed = 100.0f;
         public const float CarromMenMaxSpeed = 300.0f;
         public const float CarromMenSpeedAdjustment = 5.0f;
-        public const int pieceWidth = 100;
-        public const int pieceHeight = 150;
+        public const int pieceWidth = 1500;
+        public const int pieceHeight = 1500;
 
+        public const float carromManBoundingSphereScale = 0.95f;
+        public const float strikerBoundingSphereScale = 0.5f;
 
         public static Vector3 center = new Vector3(0.0f, 0.0f, 0.0f);
         public static Vector3[] pieceLocations = {
